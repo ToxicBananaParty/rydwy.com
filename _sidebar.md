@@ -1,5 +1,6 @@
 - **Home**
     - [About Me](/)
+    - [Resumé](resume.md)
     - [Contact](contact.md)
 - **Portfolio**
     - [AR & MR](xr.md "Portfolio - XR")
