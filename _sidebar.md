@@ -1,7 +1,3 @@
-- **Home**
-    - [About Me](/)
-    - [Resumé](resume.md)
-    - [Contact](contact.md)
-- **Portfolio**
-    - [AR & MR](xr.md "Portfolio - XR")
-    - [Programming](compsci.md "Portfolio - CS")
+- [About Me](/ "Ryan Dwyer")
+- [Portfolio](portfolio.md "Portfolio - Ryan Dwyer")
+- [Resumé](resume.md "Resumé - Ryan Dwyer")
