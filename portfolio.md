@@ -1,5 +1,6 @@
 # Portfolio
-Here is a small sampling of the (public) projects that I have released. Note that I am not at liberty to talk about a lot of the really cool (but proprietary) stuff I have made / worked on
+Here is a small sampling of the (public) projects that I have released.  
+Note that I am not at liberty to talk about a lot of the really cool (but proprietary) stuff I have made / worked on.
 
 ### Ghost Backup Dancers
 Tools: Notch, TouchDesigner
