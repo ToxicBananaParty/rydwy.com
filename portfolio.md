@@ -19,7 +19,9 @@ Featured as part of a montage in the following promotional material:
 Tools: XCode, Swift5
 
 A from-scratch iPad app to control the stage and studio during client demonstrations.  
-Allows the demonstrator to cue and control different scenes, control the lights, fade down XR elements, and cut cameras with ease.
+Allows the demonstrator to cue and control different scenes, control the lights, fade down XR elements, and cut cameras with ease.  
+
+![pgmscreenshotter.png](./img/pgmscreenshotter.png)
 
 &nbsp;  
 &nbsp;
