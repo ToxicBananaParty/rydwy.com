@@ -5,4 +5,4 @@
 Hi there! I'm a Computer Scientist trained in video game development with professional on-set experience in XR and Virtual Production.  
 
 
-I currently reside in Los Angeles where I work for [XR Studios](http://xrstudios.live) as a Creative Technologist.
+I currently reside in Los Angeles where I work for [Lucasfilm](https://www.lucasfilm.com/) as a Backend Engineer.
