@@ -1,3 +1,2 @@
-#!/bin/bash
-
-/opt/bitnami/node/bin/docsify serve /opt/bitnami/projects/rydwy
+#!/opt/bitnami/node/bin/docsify 
+serve /opt/bitnami/projects/rydwy
