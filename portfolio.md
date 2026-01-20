@@ -1,6 +1,14 @@
 # Portfolio
-Here is a small sampling of the (public) projects that I have released.  
-Note that I am not at liberty to talk about a lot of the really cool (but proprietary) stuff I have made / worked on.
+Here is a small sampling of the projects that I have developed.  
+Note that I am not at liberty to talk about a lot of the really cool, but proprietary, stuff I have made / worked on.
+
+### Unreal Engine Event Bus
+Tools: Unreal Engine, AWS (API Gateway, Lambda, S3, Kinesis), InfluxDB, Grafana, C++, TypeScript
+
+Unreal Engine, via a Plugin developed in C++, provides an API of methods to be called via either code or visual scripting.  
+This API allows any data desired by the game developers (e.g. hardware info, performance metrics, progression data, etc.) to be tracked and visualized; a [serverless microservice backend](https://aws.amazon.com/serverless/) submits the metrics and events to be tracked on [InfluxDB](https://aws.amazon.com/marketplace/pp/prodview-4e7raoxoxsl4y) which is then visualized on [Grafana](https://grafana.com/).
+
+I cannot say much more or show the plugin in action in the interest of respecting confidentiality -- it is very powerful and extremely useful in all phases of development: for troubleshooting during development cycles, for QA during hardening cycles, and for marketing and analytics post-release.
 
 ### Ghost Backup Dancers
 Tools: Notch, TouchDesigner
