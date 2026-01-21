@@ -2,6 +2,20 @@
 Here is a small sampling of the projects that I have developed.  
 Note that I am not at liberty to talk about a lot of the really cool, but proprietary, stuff I have made / worked on.
 
+### Software Warehouse API & Dashboard
+Tools: Docker, Kubernetes, ScyllaDB, GraphiQL, Rust (Bevy, Pyo3), TypeScript (React), Python
+
+ILM retains a massive internal library of software. The releasing and distribution of this software library is tracked via a global database built on ScyllaDB and Bevy.
+I helped lead development on SoftServe, the user-facing portion of the software warehouse. This included development of an API built on GraphQL and a web dashboard powered by React.
+
+As a part of this project, I also helped maintain and improve the CI/CD for the software warehouse; I also oversaw the migration of large parts of the warehouse codebase from Python to Rust.
+
+![softserve-releases.png](./img/softserve-releases.png ':size=66%')
+
+
+![softserve-release.png](./img/softserve-release.png ':size=66%')
+
+
 ### Unreal Engine Event Bus
 Tools: Unreal Engine, AWS (API Gateway, Lambda, S3, Kinesis), InfluxDB, Grafana, C++, TypeScript
 
@@ -40,7 +54,9 @@ Tools: TouchDesigner, Disguise, C++, Python
 A series of TouchDesigner [Custom Operators](https://docs.derivative.ca/Custom_Operators) that implement the Disguise [RenderStream API](https://github.com/disguise-one/RenderStream).  
 Allows for any TouchDesigner texture to be sent to Disguise à la Unreal or Notch RenderStream.
 
-[touchrender.mp4](./img/touchrender.mp4 ':include')
+<video src="./img/touchrender.mp4" controls style="max-width:75%; height: auto;"></video>
+
+In this video, a keyframed camera in Disguise (the left application) sends its stateful data to TouchDesigner (the right application). A 3D scene designed in TouchDesigner then uses this as the data source for its own internal camera, the resulting frames of which are then sent back to Disguise and displayed on a theoretical LED Volume stage.
 
 &nbsp;  
 &nbsp;

@@ -1,4 +1,6 @@
-# Ryan Dwyer - Creative Techologist
+# Ryan Dwyer - Creative Techologist & Platform Engineer
+
+<img src="./img/headshot.png" alt="headshot" width="250px" style="padding-top: 2%; border-radius: 50%; padding-bottom: 3%;" />
 
 Hi there! I'm a Computer Scientist trained in video game development with professional on-set experience in XR and Virtual Production. My areas of expertise include DevOps, Site Reliability Engineering, and Platform Engineering.
 
