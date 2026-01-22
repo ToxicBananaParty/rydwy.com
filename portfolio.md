@@ -10,10 +10,13 @@ I helped lead development on SoftServe, the user-facing portion of the software 
 
 As a part of this project, I also helped maintain and improve the CI/CD for the software warehouse; I also oversaw the migration of large parts of the warehouse codebase from Python to Rust.
 
-![softserve-releases.png](./img/softserve-releases.png ':size=66%')
+<a href="https://rydwy.com/img/softserve-releases.png" target="_blank" rel="noreferrer noopener">
+<img src="./img/softserve-releases.png" style="height: auto;max-width: 75%;" />
+</a>
 
-
-![softserve-release.png](./img/softserve-release.png ':size=66%')
+<a href="https://rydwy.com/img/softserve-release.png" target="_blank" rel="noreferrer noopener">
+<img src="./img/softserve-release.png" style="height: auto;max-width: 75%;" />
+</a>
 
 
 ### Unreal Engine Event Bus
@@ -43,7 +46,9 @@ Tools: XCode, Swift5
 A from-scratch iPad app to control the stage and studio during client demonstrations.  
 Allows the demonstrator to cue and control different scenes, control the lights, fade down XR elements, and cut cameras with ease.  
 
-![democontroller.png](./img/democontroller.png ':size=45%')
+<a href="https://rydwy.com/img/democontroller.png" target="_blank" rel="noreferrer noopener">
+<img src="./img/democontroller.png" style="height: auto;max-width: 55%;" />
+</a>
 
 &nbsp;  
 &nbsp;
