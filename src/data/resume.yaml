@@ -1,0 +1,107 @@
+contact:
+  website: rydwy.com
+  phone: (513) 909-6416
+  email: ryan@rydwy.com
+
+education:
+  - school: Miami University
+    degrees:
+      - B.A. in Interactive Media Studies
+      - B.S. in Computer Science
+    notes: >-
+      Lead Developer of several immersive projection mapping experiences and
+      game prototypes; oversaw virtual production CAVE construction and
+      operation.
+
+experience:
+  - company: Lucasfilm
+    roles:
+      - title: Production Engineer
+        dates: May 2023 – Present
+        summary: "As part of ILM's Platform Team, I:"
+        bullets:
+          - developed prototype gameplay features alongside game designers
+          - maintained and upgraded core technologies (TeamCity, Jenkins, etc.)
+          - helped migrate every single machine from CentOS to Alma Linux
+          - >-
+            developed and maintained CI/CD build and release processes using
+            Kubernetes and GitLab CI/CD
+          - >-
+            migrated large portions of our software distribution system's
+            codebase from Python to Rust, improving performance, reliability,
+            and memory safety
+          - >-
+            led development on a centralized notification system for internal
+            downtime and maintenance, which massively increased the quality
+            and consistency of alerting across the entire company
+          - >-
+            developed a frontend dashboard for tracking and managing releases
+            made by our software distribution system
+      - title: Backend Engineer
+        dates: Sept 2022 – May 2023
+        summary: >-
+          As part of the Automation Team for the Advanced Development
+          department, developed plugins for Unreal Engine to provide analytics
+          & telemetry. Provided DevOps, CI/CD, and Perforce support for
+          hundreds of designers and developers.
+        bullets: []
+  - company: XR Studios
+    roles:
+      - title: Creative Technologist
+        dates: May 2021 – Sept 2022
+        summary: >-
+          Led development on proprietary systems and applications, mainly
+          concerning studio control and pipeline automation. Oversaw version
+          control & client-facing documentation.
+        bullets: []
+
+rdProjects:
+  - name: Unreal Event Bus
+    blurb: >-
+      Realtime analytics from Unreal Engine to a Grafana dashboard through an
+      AWS-based backend via a plugin developed in C++
+  - name: Software Warehouse
+    blurb: >-
+      A ScyllaDB server written in Rust that allows tracking and management of
+      software releases. Includes a Python client library, GraphQL API, and
+      React/TypeScript web dashboard
+  - name: P4 User Manager
+    blurb: >-
+      Collection of scripts and chatbots that enables producers to easily add,
+      remove, and modify permissions for P4 users across dozens of servers
+      located throughout the world
+  - name: GhostDancers
+    blurb: AR backup dancers ft. NVIDIA AI body tracking
+
+skills:
+  - C++
+  - Rust
+  - TypeScript / NodeJS
+  - Python
+  - VCS (Perforce, Git)
+  - CI/CD (GitLab, Jenkins)
+  - Ansible
+  - Docker
+  - Kubernetes
+  - C#
+  - TDD Writing
+  - Bash & PowerShell
+  - Incredibuild
+  - AWS Microservices
+  - HTML & CSS
+  - Swift5
+  - Unreal Engine
+  - Unity Engine
+  - Adobe Suite
+
+credits:
+  - '"The Proud Family" Virtual Concert'
+  - 'TikTok LIVE: "Familia" Virtual Concert'
+  - Pentatonix 2022 Holiday Virtual Concert
+  - Porter Robinson "Star Guardian 2022"
+  - Candy Cane Lane
+  - 'Star Wars: Ahsoka (Season 1)'
+  - 'Star Wars: The Mandalorian (Season 3)'
+  - 'Star Wars: The Acolyte (Season 1)'
+  - 'Star Wars: Andor (Season 2)'
+  - 'Star Wars: Beyond Victory'
