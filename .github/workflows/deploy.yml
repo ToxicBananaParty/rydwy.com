@@ -1,0 +1,69 @@
+name: Build & Deploy
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy
+  cancel-in-progress: false
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install
+        run: npm ci
+
+      - name: Typecheck & schema validation
+        run: npm run check
+
+      - name: Build
+        run: npm run build
+
+      - name: Scraper-regression verification
+        run: npm run verify
+
+      - name: Set up SSH
+        env:
+          SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
+          SSH_HOST: ${{ secrets.DEPLOY_HOST }}
+        run: |
+          mkdir -p ~/.ssh
+          printf '%s\n' "$SSH_KEY" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          ssh-keyscan -H "$SSH_HOST" >> ~/.ssh/known_hosts
+
+      - name: Deploy (rsync release + atomic symlink flip)
+        env:
+          HOST: ${{ secrets.DEPLOY_HOST }}
+          USER: ${{ secrets.DEPLOY_USER }}
+        run: |
+          set -euo pipefail
+          BASE="/opt/bitnami/projects/rydwy"
+          RELEASE="$BASE/releases/${GITHUB_SHA::12}"
+          SSH="ssh -i ~/.ssh/deploy_key"
+
+          $SSH "$USER@$HOST" "mkdir -p '$RELEASE'"
+          rsync -az --delete -e "$SSH" dist "$USER@$HOST:$RELEASE/"
+          rsync -az -e "$SSH" server/app.mjs "$USER@$HOST:$BASE/app.mjs"
+          $SSH "$USER@$HOST" "
+            set -e
+            ln -sfn '$RELEASE' '$BASE/current.tmp'
+            mv -Tf '$BASE/current.tmp' '$BASE/current'
+            cd '$BASE/releases' && ls -1t | tail -n +6 | xargs -r rm -rf
+          "
+
+      - name: Smoke-check live site
+        run: |
+          sleep 3
+          curl -sf https://rydwy.com/portfolio/ | grep -q 'Ghost Backup Dancers'
+          echo '✓ live site serves portfolio content in raw HTML'
