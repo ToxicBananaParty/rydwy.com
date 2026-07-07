@@ -794,7 +794,10 @@ credits:
 - [ ] **Step 3: Create `src/data/resume-schema.ts`** — validates the YAML at build time so a typo fails the build, not the live site.
 
 ```ts
-import { z } from 'astro:content';
+// NOTE: import z from 'astro/zod' (NOT 'astro:content'). Under Astro 7 / Zod v4,
+// astro:content re-exports z as a value-only binding, so `z.infer` in type
+// position below fails `astro check`. 'astro/zod' is Astro's prescribed source.
+import { z } from 'astro/zod';
 import rawResume from './resume.yaml';
 
 const roleSchema = z.object({
