@@ -1,5 +1,6 @@
 ---
 import { site } from '../data/site';
+import MobileNav from './MobileNav.tsx';
 
 const links = [
   { href: '/portfolio/', label: 'Portfolio' },
@@ -33,6 +34,9 @@ const current = Astro.url.pathname;
       <li><a href={site.github} rel="me noopener">GitHub</a></li>
       <li><a href={site.linkedin} rel="me noopener">LinkedIn</a></li>
     </ul>
+    <div class="mobile-nav-slot">
+      <MobileNav client:media="(max-width: 640px)" />
+    </div>
   </div>
 </header>
 
@@ -93,5 +97,52 @@ const current = Astro.url.pathname;
     .header-contact {
       display: none;
     }
+  }
+  .mobile-nav-slot {
+    display: none;
+  }
+  @media (max-width: 640px) {
+    nav[aria-label='Main'] {
+      display: none;
+    }
+    .mobile-nav-slot {
+      display: block;
+    }
+  }
+</style>
+
+<style is:global>
+  .mobile-nav-trigger {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-dim);
+    background: none;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: var(--space-2) var(--space-3);
+    cursor: pointer;
+  }
+  .mobile-nav-content {
+    background: var(--charcoal-3);
+    border: 1px solid var(--border-hover);
+    border-radius: 6px;
+    padding: var(--space-2);
+    min-width: 180px;
+  }
+  .mobile-nav-item {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    color: var(--text);
+    text-decoration: none;
+    padding: var(--space-2) var(--space-3);
+    border-radius: 4px;
+    outline: none;
+  }
+  .mobile-nav-item[data-highlighted] {
+    background: var(--charcoal-5);
+    color: var(--link-hover);
   }
 </style>
