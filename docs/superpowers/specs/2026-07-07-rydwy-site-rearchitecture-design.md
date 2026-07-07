@@ -85,7 +85,7 @@ Editing workflow: add/edit a Markdown or YAML file, push to `main`, site
 rebuilds and deploys automatically.
 
 **Content migration & refresh:**
-- The 7 projects in `portfolio.md` migrate to individual project files. The
+- The 8 projects in `portfolio.md` migrate to individual project files. The
   Instagram embed in "Ghost Backup Dancers" is replaced with a plain styled
   link to the Instagram post (the embed loads Instagram's SDK — third-party JS,
   layout shift, and it breaks the no-client-side-content principle).
@@ -132,7 +132,8 @@ the PDF after browsing should see one designed system.
   (replacing today's "open PNG in new tab").
 - **Media discipline:** headshot and screenshots go through Astro's image
   pipeline (modern formats, responsive srcset; the 1MB headshot PNG becomes
-  tens of KB). The 13MB demo video uses `preload="none"` with a poster frame.
+  tens of KB). The 13MB demo video uses `preload="metadata"`, so visitors load
+  only headers and a first frame until they press play.
 - **Explicitly avoided:** gradients, glassmorphism, animated hero text, emoji
   in headings, multiple accent colors.
 - **Accessibility:** semantic HTML landmarks, alt text on all images, WCAG AA
