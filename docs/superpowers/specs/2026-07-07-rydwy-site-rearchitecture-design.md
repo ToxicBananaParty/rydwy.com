@@ -90,12 +90,12 @@ rebuilds and deploys automatically.
   link to the Instagram post (the embed loads Instagram's SDK — third-party JS,
   layout shift, and it breaks the no-client-side-content principle).
 - Resume content transcribed from `img/resume.png` into `resume.yaml`.
-- Home bio copy refreshed (current copy says "moving to NYC around March 2026,"
-  which is now in the past). New copy drafted during implementation and
-  confirmed with Ryan.
-- Contact links: email `ryan@rydwy.com`; GitHub and LinkedIn URLs confirmed
-  with Ryan before launch (the git remote account is `ToxicBananaParty` — Ryan
-  decides whether that handle appears on a professional site).
+- Home bio copy refreshed: Ryan now lives on the Upper West Side of New York
+  City (the old "moving to NYC around March 2026" line is stale). Role stays as
+  on the resume — Production Engineer, ILM Platform team, Lucasfilm. Exact copy
+  drafted during implementation for Ryan's sign-off.
+- Contact links: email `ryan@rydwy.com`, GitHub `github.com/ToxicBananaParty`,
+  LinkedIn `linkedin.com/in/ryandanieldwyer`.
 - Phone number appears on the resume page only (matching the PDF), not in the
   global footer.
 
