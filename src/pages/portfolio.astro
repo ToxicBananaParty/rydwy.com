@@ -1,0 +1,23 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import { site } from '../data/site';
+
+const projects = (await getCollection('projects')).sort(
+  (a, b) => a.data.order - b.data.order
+);
+---
+
+<Base
+  title={`Portfolio — ${site.name}`}
+  description="Selected projects by Ryan Dwyer: platform engineering, XR and virtual production tooling, real-time graphics, and studio automation."
+>
+  <h1>Portfolio</h1>
+  <p>
+    A small sampling of the projects I have developed. Note that I am not at
+    liberty to talk about a lot of the really cool — but proprietary — things
+    I've made and worked on.
+  </p>
+  {projects.map((project) => <ProjectCard project={project} />)}
+</Base>
