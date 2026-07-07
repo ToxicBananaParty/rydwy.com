@@ -2221,7 +2221,9 @@ app.use(
 );
 
 app.use((_req, res) => {
-  res.status(404).sendFile(path.join(DIST, '404.html'));
+  // Express 5's res.sendFile throws NotFoundError on an absolute path; use the
+  // { root } form with a relative filename instead.
+  res.status(404).sendFile('404.html', { root: DIST });
 });
 
 app.listen(PORT, () => {
