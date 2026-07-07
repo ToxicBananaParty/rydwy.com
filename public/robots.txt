@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://rydwy.com/sitemap-index.xml

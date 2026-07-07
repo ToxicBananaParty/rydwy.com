@@ -1,0 +1,25 @@
+---
+import Base from '../layouts/Base.astro';
+import { site } from '../data/site';
+---
+
+<Base title={`404 — ${site.name}`} description="Page not found on rydwy.com.">
+  <section class="notfound">
+    <h1 class="mono">404</h1>
+    <p>That page doesn't exist.</p>
+    <p class="mono">
+      <a href="/">← Back to rydwy.com</a>
+    </p>
+  </section>
+</Base>
+
+<style>
+  .notfound {
+    text-align: center;
+    padding: var(--space-8) 0;
+  }
+  .notfound h1 {
+    font-size: 4rem;
+    margin-bottom: var(--space-2);
+  }
+</style>
