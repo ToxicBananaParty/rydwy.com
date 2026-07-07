@@ -1,0 +1,54 @@
+:root {
+  /* charcoal scale — dark cool-tinted neutrals (resume header #26262b family) */
+  --charcoal-1: #17171a;
+  --charcoal-2: #1c1c20;
+  --charcoal-3: #232329;
+  --charcoal-4: #28282f;
+  --charcoal-5: #2e2e36;
+  --charcoal-6: #36363f;
+  --charcoal-7: #42424d;
+  --charcoal-8: #565663;
+  --charcoal-9: #696977;
+  --charcoal-10: #777786;
+  --charcoal-11: #a9a9b5;
+  --charcoal-12: #e8e8ec;
+
+  /* cream scale — warm paper (resume sidebar #f5f5dc family) */
+  --cream-1: #fdfdf4;
+  --cream-2: #fafae9;
+  --cream-3: #f5f5dc;
+  --cream-4: #efefcf;
+  --cream-5: #e7e7c0;
+  --cream-6: #dcdcac;
+  --cream-7: #cbcb92;
+  --cream-8: #b5b573;
+  --cream-9: #a3a35f;
+  --cream-10: #96964f;
+  --cream-11: #8f8f5e;
+  --cream-12: #3a3a20;
+
+  /* semantic aliases */
+  --bg: var(--charcoal-1);
+  --bg-panel: var(--charcoal-3);
+  --bg-chip: var(--charcoal-4);
+  --border: var(--charcoal-6);
+  --border-hover: var(--charcoal-8);
+  --text: var(--cream-2);
+  --text-dim: var(--charcoal-11);
+  --heading: var(--cream-3);
+  --link: var(--cream-6);
+  --link-hover: var(--cream-1);
+
+  --font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+  --font-sans: 'Inter Variable', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  --content-width: 48rem;
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4rem;
+}
