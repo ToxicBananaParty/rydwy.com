@@ -1,0 +1,216 @@
+---
+import Base from '../layouts/Base.astro';
+import { site } from '../data/site';
+import { resume } from '../data/resume-schema';
+---
+
+<Base
+  title={`Resumé — ${site.name}`}
+  description="Resumé of Ryan Dwyer — Platform Engineer: Lucasfilm/ILM production engineering, XR Studios creative technology, DevOps, CI/CD, Rust, and virtual production."
+>
+  <div class="resume-head">
+    <div>
+      <h1>{site.name}</h1>
+      <p class="mono resume-title">Platform Engineer</p>
+    </div>
+    <a href="/resume.pdf" class="mono download" download>Download PDF ↓</a>
+  </div>
+
+  <p class="mono contact-line">
+    {resume.contact.website} · {resume.contact.email} · {resume.contact.phone}
+  </p>
+
+  <section aria-labelledby="education">
+    <h2 id="education">Education</h2>
+    {
+      resume.education.map((edu) => (
+        <div class="entry">
+          <h3>{edu.school}</h3>
+          <ul class="degrees mono">
+            {edu.degrees.map((d) => (
+              <li>{d}</li>
+            ))}
+          </ul>
+          <p>{edu.notes}</p>
+        </div>
+      ))
+    }
+  </section>
+
+  <section aria-labelledby="experience">
+    <h2 id="experience">Work Experience</h2>
+    {
+      resume.experience.map((job) => (
+        <div class="entry">
+          <h3>{job.company}</h3>
+          {job.roles.map((role) => (
+            <div class="role">
+              <p class="mono role-line">
+                <strong>{role.title}</strong>
+                <span class="dates">{role.dates}</span>
+              </p>
+              <p>{role.summary}</p>
+              {role.bullets.length > 0 && (
+                <ul>
+                  {role.bullets.map((b) => (
+                    <li>{b}</li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          ))}
+        </div>
+      ))
+    }
+  </section>
+
+  <section aria-labelledby="rd-projects">
+    <h2 id="rd-projects">R&amp;D Projects</h2>
+    {
+      resume.rdProjects.map((p) => (
+        <p class="rd-project">
+          <strong class="mono">{p.name}</strong> — {p.blurb}
+        </p>
+      ))
+    }
+  </section>
+
+  <section aria-labelledby="skills">
+    <h2 id="skills">Skills &amp; Training</h2>
+    <ul class="chips" aria-label="Skills">
+      {resume.skills.map((s) => <li>{s}</li>)}
+    </ul>
+  </section>
+
+  <section aria-labelledby="credits">
+    <h2 id="credits">Credits (Selected)</h2>
+    <ul class="credits">
+      {resume.credits.map((c) => <li>{c}</li>)}
+    </ul>
+  </section>
+</Base>
+
+<style>
+  .resume-head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--space-4);
+    flex-wrap: wrap;
+    padding-top: var(--space-6);
+  }
+  .resume-head h1 {
+    margin-bottom: var(--space-1);
+  }
+  .resume-title {
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 0.85rem;
+    margin: 0;
+  }
+  .download {
+    display: inline-block;
+    padding: var(--space-2) var(--space-4);
+    border: 1px solid var(--border-hover);
+    border-radius: 6px;
+    background: var(--bg-panel);
+    color: var(--heading);
+    text-decoration: none;
+    font-size: 0.85rem;
+    white-space: nowrap;
+  }
+  .download:hover {
+    border-color: var(--cream-8);
+  }
+  .contact-line {
+    color: var(--text-dim);
+    font-size: 0.85rem;
+    margin-top: var(--space-3);
+  }
+  .entry {
+    margin-bottom: var(--space-5);
+  }
+  .degrees {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 var(--space-2);
+    font-size: 0.9rem;
+  }
+  .role {
+    margin: var(--space-3) 0 var(--space-4);
+  }
+  .role-line {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--space-3);
+    flex-wrap: wrap;
+    margin-bottom: var(--space-2);
+    font-size: 0.95rem;
+  }
+  .dates {
+    color: var(--text-dim);
+    font-size: 0.85rem;
+  }
+  .role ul {
+    margin: var(--space-2) 0 0;
+    padding-left: 1.2rem;
+  }
+  .role li {
+    margin-bottom: var(--space-1);
+  }
+  .rd-project {
+    margin-bottom: var(--space-3);
+  }
+  .credits {
+    columns: 2;
+    column-gap: var(--space-6);
+    padding-left: 1.2rem;
+    margin: 0;
+  }
+  .credits li {
+    margin-bottom: var(--space-2);
+    break-inside: avoid;
+  }
+  @media (max-width: 640px) {
+    .credits {
+      columns: 1;
+    }
+  }
+</style>
+
+<!-- Print = the PDF layout: cream paper, dark ink, chrome hidden.
+     Inlined (is:inline) so the print/PDF rules ship inside the resume HTML
+     itself rather than the bundled, externalized stylesheet. -->
+<style is:inline>
+  @media print {
+    body {
+      background: #fdfdf4;
+      color: #1c1c20;
+      font-size: 10.5pt;
+    }
+    .site-header,
+    .site-footer,
+    .download {
+      display: none;
+    }
+    h1,
+    h2,
+    h3 {
+      color: #17171a;
+    }
+    .resume-title,
+    .contact-line,
+    .dates {
+      color: #55554a;
+    }
+    .chips li {
+      background: #f0f0d8;
+      border-color: #cbcb92;
+      color: #3a3a20;
+    }
+    section {
+      break-inside: avoid-page;
+    }
+  }
+</style>
