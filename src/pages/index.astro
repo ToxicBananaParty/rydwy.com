@@ -1,4 +1,115 @@
 ---
+import { getCollection, render } from 'astro:content';
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import { site } from '../data/site';
+import headshot from '../assets/headshot.png';
+
+const [about] = await getCollection('about');
+const { Content } = await render(about);
+
+const personLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: site.name,
+  url: `${site.url}/`,
+  email: `mailto:${site.email}`,
+  jobTitle: 'Production Engineer',
+  worksFor: { '@type': 'Organization', name: 'Lucasfilm' },
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'New York',
+    addressRegion: 'NY',
+  },
+  sameAs: [site.github, site.linkedin],
+};
 ---
-<html lang="en"><head><meta charset="utf-8" /><title>Ryan Dwyer</title></head>
-<body><h1>Ryan Dwyer</h1></body></html>
+
+<Base
+  title={`${site.name} — ${site.tagline}`}
+  description={site.description}
+  ogType="profile"
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(personLd)} />
+    <script is:inline>
+      // legacy docsify hash-route redirects (#/portfolio → /portfolio/)
+      (function () {
+        var map = {
+          '#/portfolio': '/portfolio/',
+          '#/resume': '/resume/',
+          '#/contact': '/',
+        };
+        var target = map[location.hash.split('?')[0]];
+        if (target && target !== '/') location.replace(target);
+      })();
+    </script>
+  </Fragment>
+
+  <section class="hero">
+    <Image
+      src={headshot}
+      alt="Headshot of Ryan Dwyer"
+      width={480}
+      densities={[1, 2]}
+      class="headshot"
+      loading="eager"
+    />
+    <h1>{site.name}</h1>
+    <p class="mono tagline">{site.tagline}</p>
+  </section>
+
+  <section class="bio">
+    <Content />
+  </section>
+
+  <nav class="cta-row" aria-label="Highlights">
+    <a href="/portfolio/" class="mono cta">View portfolio →</a>
+    <a href="/resume/" class="mono cta">Read resumé →</a>
+  </nav>
+</Base>
+
+<style>
+  .hero {
+    text-align: center;
+    padding-top: var(--space-8);
+  }
+  .headshot {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 1px solid var(--border-hover);
+    margin: 0 auto var(--space-5);
+  }
+  .tagline {
+    color: var(--text-dim);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-bottom: var(--space-7);
+  }
+  .bio {
+    font-size: 1.125rem;
+  }
+  .cta-row {
+    display: flex;
+    gap: var(--space-4);
+    flex-wrap: wrap;
+    margin-top: var(--space-6);
+  }
+  .cta {
+    display: inline-block;
+    padding: var(--space-3) var(--space-5);
+    border: 1px solid var(--border-hover);
+    border-radius: 6px;
+    background: var(--bg-panel);
+    color: var(--heading);
+    text-decoration: none;
+    font-size: 0.9rem;
+  }
+  .cta:hover {
+    border-color: var(--cream-8);
+    background: var(--charcoal-4);
+  }
+</style>
