@@ -11,9 +11,19 @@ interface Props {
   title: string;
   description: string;
   ogType?: 'website' | 'profile';
+  /** Cover pages (home) omit the global header; sidebar/CTAs carry nav. */
+  hideHeader?: boolean;
+  /** Widens the main container for multi-column spreads. */
+  wide?: boolean;
 }
 
-const { title, description, ogType = 'website' } = Astro.props;
+const {
+  title,
+  description,
+  ogType = 'website',
+  hideHeader = false,
+  wide = false,
+} = Astro.props;
 const canonical = new URL(Astro.url.pathname, site.url).href;
 const ogImage = new URL('/og.png', site.url).href;
 ---
@@ -44,8 +54,8 @@ const ogImage = new URL('/og.png', site.url).href;
   </head>
   <body>
     <a href="#main-content" class="skip-link mono">Skip to content</a>
-    <Header />
-    <main id="main-content" class="container">
+    {!hideHeader && <Header />}
+    <main id="main-content" class:list={['container', { wide }]}>
       <slot />
     </main>
     <Footer />

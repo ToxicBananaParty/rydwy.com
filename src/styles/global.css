@@ -70,6 +70,10 @@ code {
   padding: 0 var(--space-5);
 }
 
+.container.wide {
+  max-width: 58rem;
+}
+
 .mono {
   font-family: var(--font-mono);
 }
