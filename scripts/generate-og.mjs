@@ -12,8 +12,7 @@ const html = `<!doctype html>
     border-bottom: 14px solid #f5f5dc;
   }
   h1 { color: #f5f5dc; font-size: 92px; letter-spacing: -2px; }
-  p  { color: #a9a9b5; font-size: 34px; margin-top: 18px;
-       text-transform: uppercase; letter-spacing: 6px; }
+  p  { color: #a9a9b5; font-size: 36px; margin-top: 18px; }
   .url { color: #cbcb92; font-size: 28px; margin-top: 64px; letter-spacing: 2px; }
 </style></head>
 <body>
