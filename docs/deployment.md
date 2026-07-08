@@ -46,6 +46,7 @@ common case) apply instantly via the symlink with zero downtime.
    ssh-copy-id -i /tmp/rydwy_deploy.pub bitnami@<lightsail-ip>
    # then on the box:
    ssh bitnami@<lightsail-ip>
+   sudo apt-get update && sudo apt-get install -y rsync   # deploy transport (both ends need it)
    mkdir -p /opt/bitnami/projects/rydwy/releases
    cd /opt/bitnami/projects/rydwy && npm install express@^5
    ```
