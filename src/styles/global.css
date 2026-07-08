@@ -19,6 +19,16 @@ body {
   font-size: 1.0625rem;
   line-height: 1.65;
   -webkit-font-smoothing: antialiased;
+  /* sticky footer: fill the viewport and let <main> absorb the slack so the
+     footer sits at the bottom on short pages */
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+
+body > main {
+  flex: 1 0 auto;
 }
 
 h1,
