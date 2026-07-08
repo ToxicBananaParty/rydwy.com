@@ -1,10 +1,27 @@
-# Ryan Dwyer - Creative Techologist & Platform Engineer
+# rydwy.com
 
-<img src="./img/headshot.png" alt="headshot" width="250px" style="padding-top: 2%; border-radius: 50%; padding-bottom: 3%;" />
+Personal portfolio and resume site for Ryan Dwyer. Fully static Astro build —
+all content is present in served HTML (no client-side content loading).
 
-Hi there! I'm a Computer Scientist trained in video game development with professional on-set experience in XR and Virtual Production. My areas of expertise include DevOps, Site Reliability Engineering, and Platform Engineering.
+## Editing content
 
+| What | Where |
+|---|---|
+| Portfolio project | `src/content/projects/*.md` (one file each; `order` controls position) |
+| Home page bio | `src/content/about.md` |
+| Resume | `src/data/resume.yaml` (then regenerate the PDF — see below) |
+| Contact links / tagline | `src/data/site.ts` |
 
-I currently reside in Los Angeles where I work for [Lucasfilm](https://www.lucasfilm.com/) as a Production Engineer on the Platform team. I will be moving to New York City around March of 2026.
+## Commands
 
-While you're here, check out my [portfolio](http://rydwy.com/#/portfolio ':target=_self')!
+- `npm run dev` — local dev server
+- `npm run build` — static build to `dist/`
+- `npm run check` — typecheck + content schema validation
+- `npm run verify` — assert built HTML contains real content (scraper test)
+- `node scripts/generate-pdf.mjs` — regenerate `public/resume.pdf` after a
+  resume edit (requires `npx playwright install chromium` once)
+
+## Deploying
+
+Push to `main`. GitHub Actions builds, verifies, and deploys to the Lightsail
+box. Details and one-time setup: `docs/deployment.md`.

@@ -1,0 +1,9 @@
+
+import __ASTRO_IMAGE_IMPORT_GLynN from "../../assets/colonelroy.png?astroContentImageFlag=&importer=src%2Fcontent%2Fprojects%2Fstatus-monitor.md";
+import __ASTRO_IMAGE_IMPORT_2llODC from "../../assets/democontroller.png?astroContentImageFlag=&importer=src%2Fcontent%2Fprojects%2Fdemo-controller.md";
+import __ASTRO_IMAGE_IMPORT_27KvJs from "../../assets/pgmscreenshotter.png?astroContentImageFlag=&importer=src%2Fcontent%2Fprojects%2Fpgm-screenshotter.md";
+import __ASTRO_IMAGE_IMPORT_ZNnWMK from "../../assets/softserve-release.png?astroContentImageFlag=&importer=src%2Fcontent%2Fprojects%2Fsoftware-warehouse.md";
+import __ASTRO_IMAGE_IMPORT_Z1WQc51 from "../../assets/softserve-releases.png?astroContentImageFlag=&importer=src%2Fcontent%2Fprojects%2Fsoftware-warehouse.md";
+import __ASTRO_IMAGE_IMPORT_2aWPTJ from "../../assets/statusmonitor.png?astroContentImageFlag=&importer=src%2Fcontent%2Fprojects%2Fstatus-monitor.md";
+export default new Map([["../../assets/colonelroy.png?astroContentImageFlag=&importer=src%2Fcontent%2Fprojects%2Fstatus-monitor.md", __ASTRO_IMAGE_IMPORT_GLynN], ["../../assets/democontroller.png?astroContentImageFlag=&importer=src%2Fcontent%2Fprojects%2Fdemo-controller.md", __ASTRO_IMAGE_IMPORT_2llODC], ["../../assets/pgmscreenshotter.png?astroContentImageFlag=&importer=src%2Fcontent%2Fprojects%2Fpgm-screenshotter.md", __ASTRO_IMAGE_IMPORT_27KvJs], ["../../assets/softserve-release.png?astroContentImageFlag=&importer=src%2Fcontent%2Fprojects%2Fsoftware-warehouse.md", __ASTRO_IMAGE_IMPORT_ZNnWMK], ["../../assets/softserve-releases.png?astroContentImageFlag=&importer=src%2Fcontent%2Fprojects%2Fsoftware-warehouse.md", __ASTRO_IMAGE_IMPORT_Z1WQc51], ["../../assets/statusmonitor.png?astroContentImageFlag=&importer=src%2Fcontent%2Fprojects%2Fstatus-monitor.md", __ASTRO_IMAGE_IMPORT_2aWPTJ]]);
+		
