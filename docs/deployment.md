@@ -3,10 +3,11 @@
 ## How it works
 
 Push to `main` → GitHub Actions: `npm ci` → `astro check` → `astro build` →
-`verify-content` (content must exist in built HTML) → rsync to the Lightsail
-box as `releases/<sha>/` → atomic `current` symlink flip → live smoke check.
-A failure at any step leaves the live site untouched. The last 5 releases are
-kept on the server.
+`verify-content` (content must exist in built HTML) → tar the build over SSH to
+the Lightsail box as `releases/<sha>/` → atomic `current` symlink flip → live
+smoke check. A failure at any step leaves the live site untouched. The last 5
+releases are kept on the server. (Transport is tar-over-ssh, not rsync, so the
+box needs no extra packages — it runs Debian buster, whose apt mirrors are EOL.)
 
 Server layout (`/opt/bitnami/projects/rydwy/`):
 
@@ -46,7 +47,6 @@ common case) apply instantly via the symlink with zero downtime.
    ssh-copy-id -i /tmp/rydwy_deploy.pub bitnami@<lightsail-ip>
    # then on the box:
    ssh bitnami@<lightsail-ip>
-   sudo apt-get update && sudo apt-get install -y rsync   # deploy transport (both ends need it)
    mkdir -p /opt/bitnami/projects/rydwy/releases
    cd /opt/bitnami/projects/rydwy && npm install express@^5
    ```

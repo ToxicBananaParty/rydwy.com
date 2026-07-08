@@ -42,7 +42,7 @@ jobs:
           chmod 600 ~/.ssh/deploy_key
           ssh-keyscan -H "$SSH_HOST" >> ~/.ssh/known_hosts
 
-      - name: Deploy (rsync release + atomic symlink flip)
+      - name: Deploy (tar over ssh + atomic symlink flip)
         env:
           HOST: ${{ secrets.DEPLOY_HOST }}
           USER: ${{ secrets.DEPLOY_USER }}
@@ -52,11 +52,14 @@ jobs:
           RELEASE="$BASE/releases/${GITHUB_SHA::12}"
           SSH="ssh -i ~/.ssh/deploy_key"
 
+          # Ship the build + server into a fresh release dir via tar over ssh —
+          # needs only tar/gzip/ssh on the box (no rsync). dist/ and
+          # server/app.mjs land under $RELEASE/; current/dist is the served root.
           $SSH "$USER@$HOST" "mkdir -p '$RELEASE'"
-          rsync -az --delete -e "$SSH" dist "$USER@$HOST:$RELEASE/"
-          rsync -az -e "$SSH" server/app.mjs "$USER@$HOST:$BASE/app.mjs"
+          tar czf - dist server/app.mjs | $SSH "$USER@$HOST" "tar xzf - -C '$RELEASE'"
           $SSH "$USER@$HOST" "
             set -e
+            cp -f '$RELEASE/server/app.mjs' '$BASE/app.mjs'
             ln -sfn '$RELEASE' '$BASE/current.tmp'
             mv -Tf '$BASE/current.tmp' '$BASE/current'
             cd '$BASE/releases' && ls -1t | tail -n +6 | xargs -r rm -rf
