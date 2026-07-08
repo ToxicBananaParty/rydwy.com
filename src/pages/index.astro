@@ -29,6 +29,8 @@ const personLd = {
   title={`${site.name} — ${site.tagline}`}
   description={site.description}
   ogType="profile"
+  hideHeader
+  wide
 >
   <Fragment slot="head">
     <script type="application/ld+json" set:html={JSON.stringify(personLd)} />
@@ -46,51 +48,119 @@ const personLd = {
     </script>
   </Fragment>
 
-  <section class="hero">
-    <Image
-      src={headshot}
-      alt="Headshot of Ryan Dwyer"
-      width={480}
-      densities={[1, 2]}
-      class="headshot"
-      loading="eager"
-    />
-    <h1>{site.name}</h1>
-    <p class="mono tagline">{site.tagline}</p>
-  </section>
+  <div class="spread">
+    <div class="intro">
+      <h1>{site.name}</h1>
+      <p class="mono role-line">{site.tagline}</p>
+      <div class="bio">
+        <Content />
+      </div>
+      <nav class="cta-row" aria-label="Highlights">
+        <a href="/portfolio/" class="mono cta">View portfolio</a>
+        <a href="/resume/" class="mono cta">Read resumé</a>
+      </nav>
+    </div>
 
-  <section class="bio">
-    <Content />
-  </section>
-
-  <nav class="cta-row" aria-label="Highlights">
-    <a href="/portfolio/" class="mono cta">View portfolio →</a>
-    <a href="/resume/" class="mono cta">Read resumé →</a>
-  </nav>
+    <aside class="rail" aria-label="Info and current role">
+      <div class="rail-intro">
+        <Image
+          src={headshot}
+          alt="Headshot of Ryan Dwyer"
+          width={240}
+          densities={[1, 2]}
+          class="headshot"
+          loading="eager"
+        />
+        <div>
+          <h2 class="rail-heading">Info</h2>
+          <ul class="rail-list">
+            <li>New York, NY</li>
+            <li><a href={`mailto:${site.email}`}>ryan@rydwy.com</a></li>
+            <li><a href={site.github} rel="me noopener">GitHub</a></li>
+            <li><a href={site.linkedin} rel="me noopener">LinkedIn</a></li>
+          </ul>
+        </div>
+      </div>
+      <h2 class="rail-heading">Currently</h2>
+      <p class="rail-lines">
+        Production Engineer,<br />
+        Platform Team,<br />
+        Core Pipeline,<br />
+        ILM / Lucasfilm
+      </p>
+    </aside>
+  </div>
 </Base>
 
 <style>
-  .hero {
-    text-align: center;
-    padding-top: var(--space-8);
+  .spread {
+    display: flex;
+    gap: var(--space-7);
+    padding-top: var(--space-7);
+    padding-bottom: var(--space-6);
+  }
+  /* The rail is second in source (h1 reads first for a11y/SEO) but sits on
+     the left visually. */
+  .rail {
+    order: -1;
+    width: 250px;
+    flex-shrink: 0;
+    background: var(--cream-3);
+    color: var(--charcoal-2);
+    padding: var(--space-6) var(--space-5);
+    font-family: var(--font-mono);
   }
   .headshot {
-    width: 200px;
-    height: 200px;
+    width: 120px;
+    height: 120px;
     object-fit: cover;
     border-radius: 50%;
-    border: 1px solid var(--border-hover);
-    margin: 0 auto var(--space-5);
+    margin-bottom: var(--space-2);
   }
-  .tagline {
-    color: var(--text-dim);
+  .rail-heading {
     font-size: 0.9rem;
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    margin-bottom: var(--space-7);
+    color: var(--charcoal-2);
+    border-bottom: 2px solid var(--charcoal-2);
+    padding-bottom: var(--space-1);
+    margin: var(--space-5) 0 var(--space-2);
+  }
+  .rail-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 0.8rem;
+    line-height: 2;
+  }
+  .rail-lines {
+    font-size: 0.8rem;
+    line-height: 1.8;
+    margin: 0;
+  }
+  .rail a {
+    color: var(--charcoal-2);
+    text-decoration-color: var(--cream-8);
+  }
+  .rail a:hover {
+    color: var(--charcoal-1);
+    text-decoration-color: var(--charcoal-1);
+  }
+  .intro {
+    flex: 1;
+    min-width: 0;
+    padding: var(--space-5) 0;
+  }
+  .intro h1 {
+    font-size: 2.4rem;
+    margin: 0 0 var(--space-2);
+  }
+  .role-line {
+    color: var(--text-dim);
+    font-size: 0.95rem;
+    margin: 0 0 var(--space-6);
   }
   .bio {
     font-size: 1.125rem;
+    max-width: 54ch;
   }
   .cta-row {
     display: flex;
@@ -111,5 +181,34 @@ const personLd = {
   .cta:hover {
     border-color: var(--cream-8);
     background: var(--charcoal-4);
+  }
+
+  @media (max-width: 760px) {
+    .spread {
+      flex-direction: column;
+      gap: var(--space-6);
+      padding-top: var(--space-5);
+    }
+    /* Column layout: restore source order so the pitch precedes the rail. */
+    .rail {
+      order: 0;
+      width: auto;
+    }
+    .rail-intro {
+      display: flex;
+      gap: var(--space-4);
+      align-items: center;
+    }
+    .rail-intro .rail-heading {
+      margin-top: 0;
+    }
+    .headshot {
+      width: 80px;
+      height: 80px;
+      margin-bottom: 0;
+    }
+    .intro {
+      padding: 0;
+    }
   }
 </style>
