@@ -32,7 +32,7 @@ running process keeps the old code until restarted).
    ```bash
    cat >> ~/.ssh/authorized_keys   # paste /tmp/rydwy_deploy.pub contents
    mkdir -p /opt/bitnami/projects/rydwy/releases
-   cd /opt/bitnami/projects/rydwy && npm install express@^4
+   cd /opt/bitnami/projects/rydwy && npm install express@^5
    ```
 3. **GitHub repo secrets** (Settings → Secrets and variables → Actions):
    - `DEPLOY_SSH_KEY` — contents of `/tmp/rydwy_deploy` (the private key)

@@ -43,8 +43,9 @@ const ogImage = new URL('/og.png', site.url).href;
     <slot name="head" />
   </head>
   <body>
+    <a href="#main-content" class="skip-link mono">Skip to content</a>
     <Header />
-    <main class="container">
+    <main id="main-content" class="container">
       <slot />
     </main>
     <Footer />
