@@ -12,15 +12,25 @@ Server layout (`/opt/bitnami/projects/rydwy/`):
 
 ```
 app.mjs                  static Express server (serves current/dist, port 3000)
-start.sh                 runs app.mjs with Bitnami's node
+start.sh                 the rydwy systemd service's ExecStart; runs app.mjs
 node_modules/            just express (installed once on the box)
 releases/<sha>/dist/     one directory per deploy
 current -> releases/<sha>
 ```
 
-Symlink flips take effect without restarting node. Restart node only when
+The server runs as a systemd service (`rydwy.service`, enabled at boot) whose
+`ExecStart` is `start.sh`. Symlink flips take effect on the next request without
+restarting anything — `app.mjs` serves through the `current/dist` path, so each
+request follows the freshly-flipped symlink live. Restart the service only when
 `app.mjs` itself changes (the workflow rsyncs it to `$BASE/app.mjs`, but the
-running process keeps the old code until restarted).
+running process keeps the old code until restarted):
+
+```bash
+sudo systemctl restart rydwy
+```
+
+The deploy workflow does not restart the service, so content-only deploys (the
+common case) apply instantly via the symlink with zero downtime.
 
 ## One-time setup (already done? skip)
 
@@ -28,9 +38,14 @@ running process keeps the old code until restarted).
    ```bash
    ssh-keygen -t ed25519 -f /tmp/rydwy_deploy -N '' -C 'rydwy-deploy'
    ```
-2. **Server** (`ssh bitnami@<lightsail-ip>`):
+2. **Authorize the deploy key + prep the box.** Install the key from your
+   machine (`ssh-copy-id` appends it and sets correct perms), then prep the
+   server:
    ```bash
-   cat >> ~/.ssh/authorized_keys   # paste /tmp/rydwy_deploy.pub contents
+   # from your Mac:
+   ssh-copy-id -i /tmp/rydwy_deploy.pub bitnami@<lightsail-ip>
+   # then on the box:
+   ssh bitnami@<lightsail-ip>
    mkdir -p /opt/bitnami/projects/rydwy/releases
    cd /opt/bitnami/projects/rydwy && npm install express@^5
    ```
@@ -40,21 +55,30 @@ running process keeps the old code until restarted).
    - `DEPLOY_USER` — `bitnami`
 
    Then delete `/tmp/rydwy_deploy*` locally.
-4. **start.sh on the server** — replace its contents with:
+4. **Point the service at the new server.** Edit
+   `/opt/bitnami/projects/rydwy/start.sh` (the `rydwy` service's `ExecStart`) to
+   launch `app.mjs` instead of the old `app.js`:
    ```bash
    #!/bin/bash
-   /opt/bitnami/node/bin/node /opt/bitnami/projects/rydwy/app.mjs
+   exec /opt/bitnami/node/bin/node /opt/bitnami/projects/rydwy/app.mjs
    ```
+   `exec` makes node the service's main process so `systemctl` signals it
+   directly; the unit file itself needs no changes.
 5. **Cutover:** run the workflow once (push to `main`, or Actions →
-   Build & Deploy → Run workflow). Confirm `current/dist` exists on the
-   server. Stop the old docsify node process however it's currently run,
-   then start via `start.sh` (same port 3000, so the Bitnami reverse proxy
-   needs no changes).
+   Build & Deploy → Run workflow) and confirm `current/dist` now exists on the
+   server — it must exist before the restart, or `app.mjs` has nothing to serve.
+   Then restart the service (same port 3000, so the Bitnami reverse proxy needs
+   no changes):
+   ```bash
+   sudo systemctl restart rydwy
+   sudo systemctl status rydwy    # expect: active (running), running app.mjs
+   curl -s localhost:3000/portfolio/ | grep -c 'Ghost Backup Dancers'   # ≥1
+   ```
 
-   Note: the workflow's final "Smoke-check live site" step will FAIL until
-   this cutover is done (the old docsify process is still answering on
-   port 3000). The deploy itself has still succeeded — re-run the workflow
-   after cutover to see it fully green.
+   Note: the workflow's final "Smoke-check live site" step will FAIL until this
+   restart happens (the old docsify process is still answering on port 3000).
+   The deploy itself still succeeded — re-run the workflow after cutover to see
+   it fully green.
 
 ## Manual fallback (no GitHub Actions)
 
