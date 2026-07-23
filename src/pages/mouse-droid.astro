@@ -112,10 +112,22 @@ import '../styles/mouse-droid-about.css';
   .preface {
     font-size: 0.9rem;
     color: var(--text-dim);
-    max-width: 920px;
+    max-width: 72rem;
     margin: 0 auto var(--space-5);
   }
   .about-root {
+    /* Widen the showcase past the app's 920px cap so it fills the roomier
+       container below (the app has no page chrome; this page does). */
+    max-width: 72rem;
     margin-bottom: var(--space-8);
+  }
+</style>
+
+<style is:global>
+  /* This showcase runs one tier wider than the site's standard `wide`
+     container. Astro ships this rule only on /mouse-droid, so the homepage's
+     `wide` layout is unaffected. The #id beats global.css's `.container.wide`. */
+  #main-content.container.wide {
+    max-width: 72rem;
   }
 </style>
