@@ -50,7 +50,7 @@ const CONTENT_CHECKS = {
 const META_PATTERNS = [
   /<meta name="description" content="[^"]{20,}"/,
   /<meta property="og:title" content="[^"]+"/,
-  /<meta property="og:image" content="https:\/\/rydwy\.com\/og\.png"/,
+  /<meta property="og:image" content="https:\/\/rydwy\.com\/og\.png(\?v=\d+)?"/,
   /<link rel="canonical" href="https:\/\/rydwy\.com\//,
 ];
 

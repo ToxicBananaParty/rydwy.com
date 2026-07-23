@@ -25,7 +25,8 @@ const {
   wide = false,
 } = Astro.props;
 const canonical = new URL(Astro.url.pathname, site.url).href;
-const ogImage = new URL('/og.png', site.url).href;
+// ?v= busts scraper/CDN caches — bump when og.png is regenerated
+const ogImage = new URL('/og.png?v=2', site.url).href;
 ---
 
 <!doctype html>
