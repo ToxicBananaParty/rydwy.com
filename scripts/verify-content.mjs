@@ -16,6 +16,7 @@ const CONTENT_CHECKS = {
     'Lucasfilm',
   ],
   'portfolio/index.html': [
+    'Mouse Droid',
     'Software Warehouse API &amp; Dashboard',
     'Unreal Engine Event Bus',
     'Ghost Backup Dancers',
@@ -36,6 +37,13 @@ const CONTENT_CHECKS = {
     'Star Wars: The Mandalorian (Season 3)',
   ],
   '404.html': ['404'],
+  'mouse-droid/index.html': [
+    'Your work, gently narrated.',
+    'Seven ways he helps',
+    'What he never sees',
+    'The wellness panel', // feature doc content is statically rendered
+    'Recall by meaning, not keywords', // guide doc content is statically rendered
+  ],
 };
 
 // meta tags every page must carry
