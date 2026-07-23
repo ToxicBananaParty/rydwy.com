@@ -1,0 +1,14 @@
+---
+import { aboutPitch } from '../../data/mouse-droid-about';
+---
+
+<section class="about-sheet about-sheet--pitch about-reveal">
+  <div class="about-kicker">{aboutPitch.kicker}</div>
+  <h2 class="about-h2">{aboutPitch.heading}</h2>
+  <p class="about-lead">{aboutPitch.lead}</p>
+  <div class="about-transform">
+    {aboutPitch.transform.signals.map((s) => <span class="about-signal">{s}</span>)}
+    <span class="about-arrow" aria-hidden="true">→</span>
+    <span class="about-outcome">{aboutPitch.transform.outcome}</span>
+  </div>
+</section>

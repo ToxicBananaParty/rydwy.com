@@ -1,0 +1,118 @@
+---
+import Base from '../layouts/Base.astro';
+import { site } from '../data/site';
+import AboutHero from '../components/mouse-droid/AboutHero.astro';
+import AboutPitch from '../components/mouse-droid/AboutPitch.astro';
+import AboutHowItWorks from '../components/mouse-droid/AboutHowItWorks.astro';
+import AboutPrivacy from '../components/mouse-droid/AboutPrivacy.astro';
+import '../styles/mouse-droid-about.css';
+---
+
+<Base
+  title={`Mouse Droid — ${site.name}`}
+  description="Mouse Droid's in-app About page: 'Your work, gently narrated.' A macOS menu-bar companion that turns window titles into a timeline, a second brain, and gentle wellness nudges."
+  wide
+>
+  <script is:inline slot="head">
+    document.documentElement.classList.add('js');
+  </script>
+  <p class="preface">
+    What follows is the in-app About page from
+    <a href="/portfolio#mouse-droid">Mouse Droid</a>, my macOS menu-bar
+    companion — reproduced from the app, fretful droid voice and all.
+  </p>
+  <div class="about-root">
+    <AboutHero />
+    <AboutPitch />
+    <AboutHowItWorks />
+    <AboutPrivacy />
+  </div>
+</Base>
+
+<script>
+  // Scroll reveals — mirrors the app's useReveal (threshold 0.15, one-shot).
+  const reveals = document.querySelectorAll('.about-reveal');
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            entry.target.setAttribute('data-inview', 'true');
+            io.unobserve(entry.target);
+          }
+        }
+      },
+      { threshold: 0.15 }
+    );
+    reveals.forEach((el) => io.observe(el));
+  } else {
+    reveals.forEach((el) => el.setAttribute('data-inview', 'true'));
+  }
+
+  // Reader dialogs — open, close button, backdrop click, scroll lock.
+  document.addEventListener('click', (event) => {
+    const target = event.target instanceof Element ? event.target : null;
+    if (!target) return;
+    const opener = target.closest('[data-dialog-target]');
+    if (opener) {
+      const id = opener.getAttribute('data-dialog-target');
+      const dialog = id ? document.getElementById(id) : null;
+      if (dialog instanceof HTMLDialogElement) {
+        const body = dialog.querySelector('.about-reader-shell__body');
+        if (body) body.scrollTop = 0;
+        const bar = dialog.querySelector('.about-reader-shell__progress');
+        if (bar instanceof HTMLElement) bar.style.transform = 'scaleX(0)';
+        dialog.showModal();
+        document.documentElement.classList.add('md-dialog-open');
+      }
+      return;
+    }
+    if (target.closest('[data-dialog-close]')) {
+      target.closest('dialog')?.close();
+      return;
+    }
+    // A click that lands on the <dialog> itself (not its children) is a
+    // backdrop click — the reader has padding: 0, so content covers the rest.
+    if (target instanceof HTMLDialogElement && target.open) target.close();
+  });
+
+  // `close` fires for every close path (button, backdrop, Escape) but does
+  // not bubble — listen in the capture phase.
+  document.addEventListener(
+    'close',
+    (event) => {
+      if (event.target instanceof HTMLDialogElement) {
+        document.documentElement.classList.remove('md-dialog-open');
+      }
+    },
+    true
+  );
+
+  // Guide reader progress bar — scroll doesn't bubble either.
+  document.addEventListener(
+    'scroll',
+    (event) => {
+      const body = event.target instanceof Element ? event.target : null;
+      if (!body || !body.classList.contains('about-reader-shell__body')) return;
+      const bar = body
+        .closest('dialog')
+        ?.querySelector('.about-reader-shell__progress');
+      if (!(bar instanceof HTMLElement)) return;
+      const max = body.scrollHeight - body.clientHeight;
+      bar.style.transform = `scaleX(${max > 0 ? Math.min(1, body.scrollTop / max) : 0})`;
+    },
+    true
+  );
+</script>
+
+<style>
+  .preface {
+    font-size: 0.9rem;
+    color: var(--text-dim);
+    max-width: 920px;
+    margin: 0 auto var(--space-5);
+  }
+  .about-root {
+    margin-bottom: var(--space-8);
+  }
+</style>

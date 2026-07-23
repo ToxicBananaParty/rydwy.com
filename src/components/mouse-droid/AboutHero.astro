@@ -1,0 +1,17 @@
+---
+import { aboutHero } from '../../data/mouse-droid-about';
+import avatar from '../../assets/mouse-droid-avatar.png';
+---
+
+<section class="about-sheet about-sheet--hero">
+  <div class="about-hero">
+    <div class="about-hero__avatar">
+      <img src={avatar.src} alt="" aria-hidden="true" width="66" height="66" />
+    </div>
+    <h1>{aboutHero.name}</h1>
+    <p class="about-hero__said">
+      <span class="about-hero__q">"</span>{aboutHero.narratedIntro}<span
+        class="about-hero__q">"</span>
+    </p>
+  </div>
+</section>

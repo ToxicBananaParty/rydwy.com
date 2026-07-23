@@ -1,0 +1,31 @@
+---
+import { howItWorks, pipeline } from '../../data/mouse-droid-about';
+import AboutIcon from './AboutIcons.astro';
+---
+
+<section class="about-sheet about-sheet--how about-reveal">
+  <div class="about-kicker">{howItWorks.kicker}</div>
+  <h2 class="about-h2">{howItWorks.heading}</h2>
+  <div class="about-pipe">
+    {
+      pipeline.map((step, i) => (
+        <>
+          <div class="about-pipe__node">
+            <span class="about-pipe__ic">
+              <AboutIcon name={step.icon} size={20} />
+            </span>
+            <span class="about-pipe__t">{step.title}</span>
+            <span class="about-pipe__s">{step.sub}</span>
+          </div>
+          {i < pipeline.length - 1 && <span class="about-pipe__link" aria-hidden="true" />}
+        </>
+      ))
+    }
+  </div>
+  <div class="about-insight">
+    <p class="about-insight__t">{howItWorks.insightText}</p>
+    <p class="about-insight__ex">
+      {howItWorks.exampleLabel} — <b>{howItWorks.exampleTitle}</b>
+    </p>
+  </div>
+</section>
