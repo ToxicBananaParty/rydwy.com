@@ -1,0 +1,57 @@
+---
+import { guides, guidesSection } from '../../data/mouse-droid-about';
+import AboutIcon from './AboutIcons.astro';
+import ReaderDialog from './ReaderDialog.astro';
+
+const docs = import.meta.glob('../../data/mouse-droid/guides/*.md', {
+  eager: true,
+}) as Record<string, { Content: any }>;
+const docFor = (id: string) => {
+  const mod = docs[`../../data/mouse-droid/guides/${id}.md`];
+  if (!mod) throw new Error(`Missing guide doc: ${id}`);
+  return mod.Content;
+};
+---
+
+<section class="about-sheet about-sheet--guides about-reveal">
+  <div class="about-kicker">{guidesSection.kicker}</div>
+  <h2 class="about-h2">{guidesSection.heading}</h2>
+  <p class="about-lead">{guidesSection.lead}</p>
+  <div class="about-guides">
+    {
+      guides.map((g) => (
+        <button type="button" class="about-gd" data-dialog-target={`guide-${g.id}`}>
+          <span class="about-ic">
+            <AboutIcon name={g.icon} />
+          </span>
+          <span class="about-gd__title">{g.title}</span>
+          <span class="about-gd__blurb">{g.blurb}</span>
+          <span class="about-gd__meta">
+            <span>{g.category}</span>
+            <span class="about-gd__read">{g.readMinutes} min read →</span>
+          </span>
+        </button>
+      ))
+    }
+  </div>
+  {
+    guides.map((g) => {
+      const Content = docFor(g.id);
+      return (
+        <ReaderDialog
+          id={`guide-${g.id}`}
+          icon={g.icon}
+          title={g.title}
+          eyebrow={g.category}
+          meta={`${g.readMinutes} min read`}
+          width="680px"
+          tall
+          showProgress
+          closeLabel="← Back"
+        >
+          <Content />
+        </ReaderDialog>
+      );
+    })
+  }
+</section>
