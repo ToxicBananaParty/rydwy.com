@@ -1,0 +1,55 @@
+---
+// Bespoke About icon set, ported from the Mouse Droid app's AboutIcons.tsx.
+// Glyphs are drawn on a 24×24 grid, stroked only, themed via currentColor.
+import type { AboutIconName } from '../../data/mouse-droid-about';
+
+interface Props {
+  name: AboutIconName;
+  size?: number;
+}
+const { name, size = 24 } = Astro.props;
+
+const glyphs: Record<AboutIconName, string> = {
+  timeline:
+    '<circle cx="4.5" cy="7" r="1.4"/><line x1="8" y1="7" x2="20" y2="7"/><circle cx="4.5" cy="12" r="1.4"/><line x1="8" y1="12" x2="16" y2="12"/><circle cx="4.5" cy="17" r="1.4"/><line x1="8" y1="17" x2="18.5" y2="17"/>',
+  chat: '<path d="M5 5h14a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2h-8l-4.2 3v-3H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z"/><circle cx="9" cy="10.5" r="1"/><circle cx="12.5" cy="10.5" r="1"/><circle cx="16" cy="10.5" r="1"/>',
+  summary:
+    '<path d="M12 3c.4 4.2 1.6 5.6 5.8 6.2-4.2.6-5.4 2-5.8 6.2-.4-4.2-1.6-5.6-5.8-6.2C10.4 8.6 11.6 7.2 12 3z"/><path d="M18.5 14.5c.2 1.8.7 2.4 2.5 2.7-1.8.3-2.3.9-2.5 2.7-.2-1.8-.7-2.4-2.5-2.7 1.8-.3 2.3-.9 2.5-2.7z"/>',
+  reports:
+    '<path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4"/><line x1="9.5" y1="12" x2="15.5" y2="12"/><line x1="9.5" y1="15.5" x2="15.5" y2="15.5"/>',
+  wellness:
+    '<path d="M12 21v-9"/><path d="M12 12c0-4 2.8-6.2 6.5-6.2C18.5 9.6 15.8 12 12 12z"/><path d="M12 15c0-3-2.2-4.8-5-4.8C7 13 9.4 15 12 15z"/>',
+  brain:
+    '<circle cx="6.5" cy="7.5" r="2.2"/><circle cx="17.5" cy="9" r="2.2"/><circle cx="11" cy="17" r="2.2"/><line x1="8.4" y1="8.6" x2="15.6" y2="8.4"/><line x1="7.6" y1="9.4" x2="10.2" y2="15"/><line x1="16.3" y1="10.9" x2="12.2" y2="15.4"/>',
+  eye: '<path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="2.6"/>',
+  ingest: '<path d="M4 5h16l-6 7v5l-4 2v-7z"/>',
+  database:
+    '<ellipse cx="12" cy="6" rx="7" ry="2.8"/><path d="M5 6v12c0 1.5 3.1 2.8 7 2.8s7-1.3 7-2.8V6"/><path d="M5 12c0 1.5 3.1 2.8 7 2.8s7-1.3 7-2.8"/>',
+  cpu: '<rect x="6" y="6" width="12" height="12" rx="2"/><rect x="9.5" y="9.5" width="5" height="5" rx="1"/><line x1="9" y1="3.5" x2="9" y2="6"/><line x1="15" y1="3.5" x2="15" y2="6"/><line x1="9" y1="18" x2="9" y2="20.5"/><line x1="15" y1="18" x2="15" y2="20.5"/><line x1="3.5" y1="9" x2="6" y2="9"/><line x1="3.5" y1="15" x2="6" y2="15"/><line x1="18" y1="9" x2="20.5" y2="9"/><line x1="18" y1="15" x2="20.5" y2="15"/>',
+  monitor:
+    '<rect x="3" y="4" width="18" height="12" rx="2"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="16" x2="12" y2="20"/>',
+  rocket:
+    '<path d="M12 3c3 1.5 5 4.5 5 8 0 2-0.6 3.7-1.6 5H8.6C7.6 14.7 7 13 7 11c0-3.5 2-6.5 5-8z"/><circle cx="12" cy="10" r="1.6"/><path d="M8.6 16c-1.4.6-2.4 2-2.6 4 2-.2 3.4-1.2 4-2.6M15.4 16c1.4.6 2.4 2 2.6 4-2-.2-3.4-1.2-4-2.6"/>',
+  migrate:
+    '<path d="M3 7l5-3 5 3v6l-5 3-5-3z"/><line x1="13" y1="10" x2="21" y2="10"/><path d="M18 7l3 3-3 3"/>',
+  palace:
+    '<path d="M4 9l8-4 8 4"/><line x1="4" y1="9" x2="20" y2="9"/><line x1="7" y1="9" x2="7" y2="18"/><line x1="12" y1="9" x2="12" y2="18"/><line x1="17" y1="9" x2="17" y2="18"/><line x1="3.5" y1="18" x2="20.5" y2="18"/>',
+  shield:
+    '<path d="M12 3l7 2.5V11c0 4.6-3 8-7 9.4C8 19 5 15.6 5 11V5.5z"/><path d="M9 11.5l2 2 4-4"/>',
+};
+---
+
+<svg
+  width={size}
+  height={size}
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="1.5"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  aria-hidden="true"
+  focusable="false"
+  data-icon={name}
+  set:html={glyphs[name]}
+/>
