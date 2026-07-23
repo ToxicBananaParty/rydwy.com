@@ -1,0 +1,60 @@
+---
+import type { AboutIconName } from '../../data/mouse-droid-about';
+import AboutIcon from './AboutIcons.astro';
+
+interface Props {
+  id: string;
+  icon: AboutIconName;
+  title: string;
+  deck?: string;
+  eyebrow?: string;
+  meta?: string;
+  width: string;
+  tall?: boolean;
+  showProgress?: boolean;
+  closeLabel?: string;
+}
+const {
+  id,
+  icon,
+  title,
+  deck,
+  eyebrow,
+  meta,
+  width,
+  tall = false,
+  showProgress = false,
+  closeLabel = 'Close',
+} = Astro.props;
+---
+
+<dialog
+  id={id}
+  class:list={['about-reader-shell', { 'about-reader-shell--tall': tall }]}
+  style={`--reader-width: ${width}`}
+>
+  {showProgress && <div class="about-reader-shell__progress" aria-hidden="true" />}
+  <div class="about-reader-shell__head">
+    <span class="about-reader-shell__icon"><AboutIcon name={icon} size={22} /></span>
+    <div class="about-reader-shell__text">
+      {
+        (eyebrow || meta) && (
+          <div class="about-reader-shell__top">
+            {eyebrow && <span class="about-reader-shell__eyebrow">{eyebrow}</span>}
+            {meta && <span class="about-reader-shell__meta">{meta}</span>}
+          </div>
+        )
+      }
+      <h3 class="about-reader-shell__title">{title}</h3>
+      {deck && <p class="about-reader-shell__deck">{deck}</p>}
+    </div>
+  </div>
+  <div class="about-reader-shell__body">
+    <div class="about-reader-shell__measure about-md"><slot /></div>
+  </div>
+  <div class="about-reader-shell__foot">
+    <button type="button" class="about-reader-shell__close" data-dialog-close>
+      {closeLabel}
+    </button>
+  </div>
+</dialog>

@@ -1,0 +1,43 @@
+---
+import { features, featureTour } from '../../data/mouse-droid-about';
+import AboutIcon from './AboutIcons.astro';
+import ReaderDialog from './ReaderDialog.astro';
+
+const docs = import.meta.glob('../../data/mouse-droid/features/*.md', {
+  eager: true,
+}) as Record<string, { Content: any }>;
+const docFor = (id: string) => {
+  const mod = docs[`../../data/mouse-droid/features/${id}.md`];
+  if (!mod) throw new Error(`Missing feature doc: ${id}`);
+  return mod.Content;
+};
+---
+
+<section class="about-sheet about-sheet--features about-reveal">
+  <div class="about-kicker">{featureTour.kicker}</div>
+  <h2 class="about-h2">{featureTour.heading}</h2>
+  <div class="about-feat">
+    {
+      features.map((f) => (
+        <button type="button" class="about-ft" data-dialog-target={`feature-${f.id}`}>
+          <span class="about-ic">
+            <AboutIcon name={f.icon} />
+          </span>
+          <span class="about-ft__name">{f.name}</span>
+          <span class="about-ft__blurb">{f.blurb}</span>
+          <span class="about-ft__more">Details →</span>
+        </button>
+      ))
+    }
+  </div>
+  {
+    features.map((f) => {
+      const Content = docFor(f.id);
+      return (
+        <ReaderDialog id={`feature-${f.id}`} icon={f.icon} title={f.name} deck={f.blurb} width="560px">
+          <Content />
+        </ReaderDialog>
+      );
+    })
+  }
+</section>
