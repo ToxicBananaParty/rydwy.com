@@ -21,3 +21,6 @@ npm-debug.log*
 
 # brainstorming session artifacts
 .superpowers/
+
+# local symlinks for Claude to explore (never commit)
+new-portfolio-items/

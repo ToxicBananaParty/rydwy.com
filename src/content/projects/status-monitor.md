@@ -1,7 +1,7 @@
 ---
 title: Status Monitor
 anchor: status-monitor
-order: 7
+order: 10
 tools: [TypeScript, Prometheus, Grafana]
 images:
   - src: ../../assets/statusmonitor.png

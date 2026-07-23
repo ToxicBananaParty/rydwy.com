@@ -1,7 +1,7 @@
 ---
 title: Ghost Backup Dancers
 anchor: ghost-backup-dancers
-order: 3
+order: 6
 tools: [Notch, TouchDesigner]
 link:
   label: Featured in XR Studios promotional material

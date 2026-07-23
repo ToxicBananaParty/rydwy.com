@@ -1,7 +1,7 @@
 ---
 title: Software Warehouse API & Dashboard
 anchor: software-warehouse
-order: 1
+order: 4
 tools: [Docker, Kubernetes, ScyllaDB, GraphQL, Rust, TypeScript, React, Python]
 images:
   - src: ../../assets/softserve-releases.png

@@ -1,7 +1,7 @@
 ---
 title: ofxXRS
 anchor: ofxxrs
-order: 8
+order: 11
 tools: [C++, openFrameworks]
 ---
 A graphical library for [openFrameworks](https://openframeworks.cc/) that

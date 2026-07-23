@@ -1,7 +1,7 @@
 ---
 title: Demo Controller
 anchor: demo-controller
-order: 4
+order: 7
 tools: [Xcode, Swift 5]
 images:
   - src: ../../assets/democontroller.png
